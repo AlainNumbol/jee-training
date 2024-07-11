@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Flights</title>
+    </head>
+    <body>
+        <h1>Flights</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Flight Number</th>
+                    <th>Departure</th>
+                    <th>Arrival</th>
+                    <th>Departure Time</th>
+                    <th>Arrival Time</th>
+                    <th>Total Seats</th>
+                    <th>Available Seats</th>
+                    <th>Base Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="flight : ${flights}">
+                    <td th:text="${flight.flightNumber}"></td>
+                    <td th:text="${flight.departureCity}"></td>
+                    <td th:text="${flight.arrivalCity}"></td>
+                    <td th:text="${#temporals.format(flight.departureDateTime, 'yyyy-MM-dd HH:mm')}"></td>
+                    <td th:text="${#temporals.format(flight.arrivalDateTime, 'yyyy-MM-dd HH:mm')}"></td>
+<!--                    <td th:text="${flight.totalSeats}"></td>
+                    <td th:text="${flight.availableSeats}"></td>
+                    <td th:text="${#numbers.formatDecimal(flight.basePrice, 0, 2)}"></td>-->
+                    <td>
+                        <a th:href="@{/flights/{id}/edit(id=${flight.id})}">Edit</a>
+                        <a th:href="@{/flights/{id}/delete(id=${flight.id})}">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a th:href="@{/flights/new}">Create New Flight</a>
+    </body>
+</html>
